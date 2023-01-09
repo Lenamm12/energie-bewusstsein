@@ -6,23 +6,27 @@ on:
   release:
     types: -released
 
-  strategy:
-  matrix:
-    node-version: [12.x]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v2
+    strategy:
+    matrix:
+      node-version: [12.x]
 
-      - name: Node installieren & bauen
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{matrix.node-version}}
-      - run: npm i
-      - run: npm run build
+      steps:
+        - uses: actions/checkout@v2
 
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@4.1.0
-        with:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          BRANCH: gh-pages
-          FOLDER: dist
+        - name: Node installieren & bauen
+          uses: actions/setup-node@v1
+          with:
+            node-version: ${{matrix.node-version}}
+        - run: npm i
+        - run: npm run build
+
+        - name: Deploy to GitHub Pages
+          uses: JamesIves/github-pages-deploy-action@4.1.0
+          with:
+            GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+            BRANCH: gh-pages
+            FOLDER: dist
