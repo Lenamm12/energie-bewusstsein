@@ -1,2 +1,3 @@
 # energie-bewusstsein
- Bachelorarbeit: Neugestaltung mit three.js
+
+Bachelorarbeit in Medieninformatik: Neugestaltung einer Website zum Thema Umwelt-bewusstsein mit three.js
