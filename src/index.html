@@ -1,87 +1,68 @@
 <!DOCTYPE html>
 <html lang="de">
   <head>
-    <title>Energie-bewusstsein - Infos über Energiesparen, Energieeffizienz und alternative Energiequellen </title>
-    <meta name="description" content="Das Infoportal zu Energieeffizienz, Energiesparen und alternativen Energiequellen vermittelt Energie-, Klima- und Umwelt-Bewusstsein">
+    <title>
+      Energie-bewusstsein - Infos über Energiesparen, Energieeffizienz und
+      alternative Energiequellen
+    </title>
+    <meta
+      name="description"
+      content="Das Infoportal zu Energieeffizienz, Energiesparen und alternativen Energiequellen vermittelt Energie-, Klima- und Umwelt-Bewusstsein"
+    />
     <meta charset="utf-8" />
     <meta
       name="viewport"
       content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
+
+    <script>
+      function toggle() {
+        var aside = document.getElementById("aside");
+
+        aside.classList.toggle("change");
+      }
+    </script>
   </head>
   <body>
-  
-    <nav>
-      <a href="#Home">Home</a>
-      <a href="#Tipps">Tipps</a>
-      <a href="#Energie">Elektrizität & Energie</a>
-      <a href="#Heizung">Heizung & Sanitär</a>
-      <a href="#Klima">Klima & Umwelt</a>
-    </nav>
-    <div id="textDiv">
-      <div id="Home">
-        <h1>Home</h1>
-        <p>
-          Es ist Tatsache, dass die Vorräte von Erdöl, Erdgas, Kohle und Uran zur Neige gehen. Dies geschieht zwar nicht heute oder morgen, aber in einigen Jahrzehnten auf jeden Fall. Doch schon jetzt ist diese zunehmende Verknappung durch den Anstieg der Rohstoffpreise spürbar.
-          <br>
-Fakt ist auch, dass der weltweite Energiebedarf extrem ansteigt. Zugleich entstehen bei der Energieerzeugung klimaschädliche Gase, welche zu höheren Temperaturen auf der Erde führen - der sogenannte Treibhauseffekt.
-<br>
-Auf der einen Seite stehen dem Menschen immer weniger herkömmliche Energieträger zur Verfügung und auf der anderen Seite benötigt er immer mehr und mehr Energie!
-Wie soll dies längerfristig funktionieren? Das kann nicht funktionieren! <br>
-
-Da ich dieser verantwortungslosen Haltung nicht länger tatenlos zusehen kann, habe ich diese Homepage geschaffen. Hier findet jeder, dem etwas am Erhalt seines eigenen Lebensraumes und der Umwelt liegt, viele Informationen wie Energie effizienter genutzt werden kann.
-<br>
-Leider denken viele Leute bei Wörtern wie Energiesparen oder Energieeffizienz an Komfortverlust. Doch im Gegenteil, die Energie wird ja effizienter genutzt - meistens ohne dabei an Komfort zu verlieren! Das Gute daran: Es kann viel Geld eingespart werden.
-Manche Leute behaupten irrtümlicherweise, dass Energiesparen nur arme Leute betrifft. Doch Energiesparen ist durchaus mit einem gehobenen Lebensstil vereinbar - entsprechende Interesse vorausgesetzt!
-
-<br>
-Falls du Ideen, Verbesserungsvorschläge oder Kritik hast, sag es mir einfach. Nutze dazu das Forum, so kann direkt über deinen Beitrag diskutiert werden.
-Natürlich kann im Forum auch über andere Themen diskutiert werden.<br>
-
-Wenn dir diese Homepage gefüllt, sei so nett und empfehle sie deinen Freunden und Bekannten weiter.<br>
-
-<br>
-Gruß,<br>
-
-Andreas Morawietz<br>
-<br>
-PS: Warte nicht auf die anderen.<br>
-Mach du den Anfang - dann machen die anderen früher oder später auch mit!
-
-        </p>
+    <aside id="aside" class="aside">
+      <div class="nav-bar">
+        <nav class="nav-links">
+          <a class="link" href="#Home" class="active"
+            ><i class="fa-sharp fa-solid fa-house"></i>Home</a
+          >
+          <a class="link" href="#Tipps"
+            ><i class="fa-solid fa-book"></i>Tipps</a
+          >
+          <a class="link" href="#Energie"
+            ><i class="fa-sharp fa-solid fa-fire"></i>Energie</a
+          >
+          <a class="link" href="#Elektrizitaet"
+            ><i class="fa-sharp fa-solid fa-bolt"></i>Elektrizität</a
+          >
+          <a class="link" href="#Heizung"
+            ><i class="fa-solid fa-bath"></i>Heizung & Sanitär</a
+          >
+          <a class="link" href="#Klima"
+            ><i class="fa-solid fa-tree"></i>Klima & Umwelt</a
+          >
+        </nav>
+        <div class="menu-btn" onclick="toggle()">
+          <div class="line line1"></div>
+          <div class="line line2"></div>
+          <div class="line line3"></div>
+        </div>
       </div>
-      <div id="#Tipps">
-        <h1>Tipps</h1>
-        <h2>Psychologische Tipps</h2>
-        <p>
-          <ol>
-            <li>Nimm dir am Anfang nicht zu viel vor<br>
-          Es braucht seine Zeit, bis man im Alltag alle Aspekte des Energiebewusstseins beachten kann.
-          Nimmt man sich am Anfang zu viel vor, so vergeht die Lust für das Energiesparen sehr schnell und man erreicht das Gegenteil: Man wird wieder verschwenderisch.</li>
-         <li> Sei konsequent<br>
-          Versuche möglichst konsequent zu sein und verzichte auf Ausnahmen.
-         Zum Beispiel ist es widersprüchlich, wenn man im Haushalt besonders darauf achtet, möglichst wenig Energie zu benötigen - man jedoch ein Luxus-Auto besitzt, welches einen sehr hohen Spritverbrauch aufweist.
-        </li>  
-        <li>Aber nie übertreiben...<br>
-          Übertreibe es niemals mit dem Energiesparen, denn man sollte nie an seinen Grundbedürfnissen sparen!
-          Es gibt stets genügend weitere Möglichkeiten, Energie einzusparen.</li>
-         <li> Lass dich nicht einschüchtern<br>
-          Lass dich nicht von ahnungslosen Personen einschüchtern, die meinen, dass Energiebewusstsein und Energiesparen lächerlich, unsinnig oder nicht notwendig seien.
-          Zeige Stärke und erkläre ihnen weshalb diese Maßnahmen notwendig sind und die Thematik wirklich jeden betrifft!</li>
-        <li>  Fördere sehr früh das Bewusstsein<br>
-          Erziehe deine Kinder - falls vorhanden - von Grund auf richtig. Sie sollten bereits mit einem gewissen Bewusstsein für Energie aufwachsen. Zum Beispiel könnte man ihnen beibringen, dass sie den Fernseher nach Gebrauch immer abschalten sollten.
-         </li> </ol></p>
-
-         <h2>
-  Top 10 - Schnelle Abhilfen
-         </h2>
-         <p>
-          
-         </p>
+      <div id="textDiv" class="blur">
+        <?php include "./content.html" ?>
       </div>
-    </div>
-    <div id="threejsDiv">
-      <canvas class="webgl"></canvas>
-    </div>
+      <div class="footer">
+        <a class="link" href="">Community</a>
+        <a class="link" href="">Downloads</a>
+        <a class="link" href="">Links</a>
+        <a class="link" href="">Über</a>
+      </div>
+    </aside>
+
+    <canvas class="webgl"></canvas>
   </body>
 </html>

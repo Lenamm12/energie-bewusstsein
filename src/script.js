@@ -2,6 +2,9 @@
 import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { Color } from 'three'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 
 
 // Canvas
@@ -11,23 +14,90 @@ const canvas = document.querySelector('canvas.webgl')
 const scene = new THREE.Scene()
 
 // Object
-const geometry = new THREE.BoxGeometry(1, 1, 1)
+/* const geometry = new THREE.BoxGeometry(1, 1, 1)
 const material = new THREE.MeshBasicMaterial({ color: 0xff0000, wireframe: true })
 const mesh = new THREE.Mesh(geometry, material)
-scene.add(mesh)
+scene.add(mesh) */
 
 // Sizes
-const threejsDiv = document.querySelector('div#threejsDiv')
+
 const sizes = {
     width: window.innerWidth*0.5, //canvas.width,
     height:  window.innerHeight//canvas.height
 } 
 
+const dracoLoader = new DRACOLoader()
+dracoLoader.setDecoderPath('/draco/')
+
+const gltfLoader = new GLTFLoader()
+gltfLoader.setDRACOLoader(dracoLoader)
+
+let mixer = null
+
+gltfLoader.load(
+    '/modell/haus.glb',
+    (gltf) =>
+    {
+        console.log('success')
+        console.log(gltf)
+        gltf.scene.scale.set(0.025, 0.025, 0.025)
+
+        while(gltf.scene.children.length){
+            var object = gltf.scene.children[0];
+            object.traverse((node) => {
+              if (!node.isMesh) return;
+              node.material.wireframe = true;
+            });
+            scene.add(object);
+       // scene.add(gltf.scene.children[0])
+        }
+
+         // Animation
+       /*   mixer = new THREE.AnimationMixer(gltf.scene)
+         const action = mixer.clipAction(gltf.animations[2])
+         action.play() */
+    },
+    (progress) =>
+    {
+        console.log('progress')
+        console.log(progress)
+    },
+    (error) =>
+    {
+        console.log('error')
+        console.log(error)
+    }
+)
+
+
+/**
+ * Lights
+ */
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.8)
+scene.add(ambientLight)
+
+const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6)
+directionalLight.castShadow = true
+directionalLight.shadow.mapSize.set(1024, 1024)
+directionalLight.shadow.camera.far = 15
+directionalLight.shadow.camera.left = - 7
+directionalLight.shadow.camera.top = 7
+directionalLight.shadow.camera.right = 7
+directionalLight.shadow.camera.bottom = - 7
+directionalLight.position.set(- 5, 5, 0)
+scene.add(directionalLight)
+
 window.addEventListener('resize', () =>
 {
     // Update sizes
-    sizes.width = window.innerWidth*0.5
-    sizes.height = window.innerHeight
+    if(window.innerWidth >= 768){
+        sizes.width = window.innerWidth*0.5
+        sizes.height = window.innerHeight
+    }
+    else{
+        sizes.width = window.innerWidth
+        sizes.height = window.innerHeight*0.5
+    }
 
     // Update camera
     camera.aspect = sizes.width / sizes.height
@@ -81,11 +151,12 @@ window.addEventListener('mousemove', (event) =>
 
 // Camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height)
-camera.position.z = 3
+camera.position.set(2, 2, 2)
 scene.add(camera)
 
 // Controls
 const controls = new OrbitControls(camera, canvas)
+controls.target.set(0, 0.75, 0)
 controls.enableDamping = true
 
 // Renderer
@@ -94,15 +165,25 @@ const renderer = new THREE.WebGLRenderer({
     alpha: true
 })
 renderer.setSize(sizes.width, sizes.height)
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 renderer.render(scene, camera)
 
 // Animate
 const clock = new THREE.Clock()
+let previousTime = 0
 
 const tick = () =>
 {
     const elapsedTime = clock.getElapsedTime()
+    const deltaTime = elapsedTime - previousTime
+    previousTime = elapsedTime
 
+    // Model animation
+   /*  if(mixer)
+    {
+        mixer.update(deltaTime)
+    }
+ */
     // Update controls
     controls.update()
 
