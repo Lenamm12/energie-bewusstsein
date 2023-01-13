@@ -22,9 +22,10 @@ scene.add(mesh) */
 // Sizes
 
 const sizes = {
-    width: window.innerWidth*0.5, //canvas.width,
-    height:  window.innerHeight//canvas.height
-} 
+    width : 0,
+    height : 0
+}
+setSize()
 
 const dracoLoader = new DRACOLoader()
 dracoLoader.setDecoderPath('/draco/')
@@ -51,6 +52,8 @@ gltfLoader.load(
             scene.add(object);
        // scene.add(gltf.scene.children[0])
         }
+
+        scene.rotateY(100)
 
          // Animation
        /*   mixer = new THREE.AnimationMixer(gltf.scene)
@@ -87,26 +90,63 @@ directionalLight.shadow.camera.bottom = - 7
 directionalLight.position.set(- 5, 5, 0)
 scene.add(directionalLight)
 
+
+// Camera
+const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height)
+camera.position.set(-3.5, 1.5, -2.5)
+scene.add(camera)
+
+// Controls
+const controls = new OrbitControls(camera, canvas)
+controls.target.set(0, 0.75, 0)
+controls.enableDamping = true
+
+// Renderer
+const renderer = new THREE.WebGLRenderer({
+    canvas: canvas,
+    alpha: true
+})
+renderer.setSize(sizes.width, sizes.height)
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+renderer.render(scene, camera)
+
+
 window.addEventListener('resize', () =>
 {
+    setSize()
+
+     // Update camera
+     camera.aspect = sizes.width / sizes.height
+     camera.updateProjectionMatrix()
+ 
+     // Update renderer
+     renderer.setSize(sizes.width, sizes.height)
+     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+})
+
+function setSize(){
+    var aside = document.getElementById("aside");
+
     // Update sizes
-    if(window.innerWidth >= 768){
+    if(window.innerWidth >= 768 && aside.classList.contains("change")){
+        sizes.width = window.innerWidth*0.9
+        sizes.height = window.innerHeight
+    }
+
+    else if(window.innerWidth >= 768){
         sizes.width = window.innerWidth*0.5
         sizes.height = window.innerHeight
+
     }
     else{
         sizes.width = window.innerWidth
-        sizes.height = window.innerHeight*0.5
+        sizes.height = window.innerHeight
+
+        aside.classList.add("change");
     }
+}
 
-    // Update camera
-    camera.aspect = sizes.width / sizes.height
-    camera.updateProjectionMatrix()
 
-    // Update renderer
-    renderer.setSize(sizes.width, sizes.height)
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-})
 
 window.addEventListener('dblclick', () =>
 {
@@ -148,25 +188,6 @@ window.addEventListener('mousemove', (event) =>
     cursor.y = - (event.clientY / sizes.height - 0.5)
 })
 
-
-// Camera
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height)
-camera.position.set(2, 2, 2)
-scene.add(camera)
-
-// Controls
-const controls = new OrbitControls(camera, canvas)
-controls.target.set(0, 0.75, 0)
-controls.enableDamping = true
-
-// Renderer
-const renderer = new THREE.WebGLRenderer({
-    canvas: canvas,
-    alpha: true
-})
-renderer.setSize(sizes.width, sizes.height)
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-renderer.render(scene, camera)
 
 // Animate
 const clock = new THREE.Clock()

@@ -15,29 +15,45 @@
       content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <script>
-      function toggle() {
-        var aside = document.getElementById("aside");
-
-        aside.classList.toggle("change");
-      }
-    </script>
+    <script
+      defer
+      src="/node_modules/@fortawesome/fontawesome-free/js/brands.js"
+    ></script>
+    <script
+      defer
+      src="/node_modules/@fortawesome/fontawesome-free/js/solid.js"
+    ></script>
+    <script
+      defer
+      src="/node_modules/@fortawesome/fontawesome-free/js/fontawesome.js"
+    ></script>
   </head>
+  <script src="script.js"></script>
+  <script>
+    function toggle() {
+      var aside = document.getElementById("aside");
+      aside.classList.toggle("change");
+
+      window.dispatchEvent("resize");
+    }
+  </script>
   <body>
+    <canvas class="webgl"></canvas>
+
     <aside id="aside" class="aside">
       <div class="nav-bar">
-        <nav class="nav-links">
+        <nav class="nav-links header">
           <a class="link" href="#Home" class="active"
-            ><i class="fa-sharp fa-solid fa-house"></i>Home</a
+            ><i class="fa-solid fa-house"></i>Home</a
           >
           <a class="link" href="#Tipps"
             ><i class="fa-solid fa-book"></i>Tipps</a
           >
           <a class="link" href="#Energie"
-            ><i class="fa-sharp fa-solid fa-fire"></i>Energie</a
+            ><i class="fa-solid fa-fire"></i>Energie</a
           >
           <a class="link" href="#Elektrizitaet"
-            ><i class="fa-sharp fa-solid fa-bolt"></i>Elektrizität</a
+            ><i class="fa-solid fa-bolt"></i>Elektrizität</a
           >
           <a class="link" href="#Heizung"
             ><i class="fa-solid fa-bath"></i>Heizung & Sanitär</a
@@ -51,18 +67,22 @@
           <div class="line line2"></div>
           <div class="line line3"></div>
         </div>
+        <div class="nav-links footer">
+          <a class="link" href=""
+            ><i class="fa-solid fa-comments"></i>Community</a
+          >
+          <a class="link" href=""
+            ><i class="fa-solid fa-file-arrow-down"></i>Downloads</a
+          >
+          <a class="link" href=""><i class="fa-solid fa-link"></i>Links</a>
+          <a class="link" href=""
+            ><i class="fa-solid fa-address-card"></i>Über</a
+          >
+        </div>
       </div>
-      <div id="textDiv" class="blur">
-        <?php include "./content.html" ?>
-      </div>
-      <div class="footer">
-        <a class="link" href="">Community</a>
-        <a class="link" href="">Downloads</a>
-        <a class="link" href="">Links</a>
-        <a class="link" href="">Über</a>
+      <div id="textDiv">
+        <?php readfile('content.html'); ?>
       </div>
     </aside>
-
-    <canvas class="webgl"></canvas>
   </body>
 </html>
