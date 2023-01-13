@@ -4,33 +4,26 @@ on:
   push:
     branches:
       - main
-  release:
-    types: -released
-permissions:
-  contents: write
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    strategy:
-    matrix:
-      node-version: [18.x]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v2
+      - name: Node installieren & bauen
+        uses: actions/setup-node@v1
+        with:
+          node-version: [18.x]
+      - run: npm ci
+      - run: npm run build
 
-        - name: Node installieren & bauen
-          uses: actions/setup-node@v1
-          with:
-            node-version: ${{matrix.node-version}}
-        - run: npm ci
-        - run: npm run build
-
-        - name: Deploy to GitHub Pages
-          uses: JamesIves/github-pages-deploy-action@v4
-          with:
-            GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-            BRANCH: gh-pages
-            folder: dist
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          BASE_BRANCH: main
+          BRANCH: gh-pages
+          folder: dist
+          BUILD_SCRIPT: npm install && npm run build
