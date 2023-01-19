@@ -111,7 +111,7 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 renderer.render(scene, camera)
 
 
-window.addEventListener('resize', () =>
+canvas.addEventListener('resize', () =>
 {
     setSize()
 
@@ -129,7 +129,7 @@ function setSize(){
 
     // Update sizes
     if(window.innerWidth >= 768 && aside.classList.contains("change")){
-        sizes.width = window.innerWidth*0.9
+        sizes.width = window.innerWidth*0.95
         sizes.height = window.innerHeight
     }
 
