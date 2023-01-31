@@ -45,10 +45,10 @@ gltfLoader.load(
 
         while(gltf.scene.children.length){
             var object = gltf.scene.children[0];
-            object.traverse((node) => {
+          /*   object.traverse((node) => {
               if (!node.isMesh) return;
               node.material.wireframe = true;
-            });
+            }); */
             scene.add(object);
        // scene.add(gltf.scene.children[0])
         }
@@ -93,7 +93,7 @@ scene.add(directionalLight)
 
 // Camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height)
-camera.position.set(-3.5, 1.5, -2.5)
+camera.position.set(-7, 2, -5)
 scene.add(camera)
 
 // Controls
@@ -111,7 +111,7 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 renderer.render(scene, camera)
 
 
-window.addEventListener('resize', () =>
+document.addEventListener('resize', () =>
 {
     setSize()
 
@@ -129,7 +129,7 @@ function setSize(){
 
     // Update sizes
     if(window.innerWidth >= 768 && aside.classList.contains("change")){
-        sizes.width = window.innerWidth*0.9
+        sizes.width = window.innerWidth*0.95
         sizes.height = window.innerHeight
     }
 
