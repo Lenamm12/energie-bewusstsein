@@ -1,0 +1,423 @@
+body {
+  display: flex;
+  flex-direction: row;
+  background: linear-gradient(
+    to bottom,
+    rgb(55, 153, 219),
+    rgb(179, 200, 228),
+    rgb(255, 255, 255)
+  );
+  width: 100%;
+  height: 100%;
+  margin: 0%;
+}
+
+/*Loading screen with rotating icon*/
+
+#loading-screen {
+  width: 100%;
+  height: 100%;
+  background-color: #f1f1f1;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#rotate-icon {
+  width: 100px;
+  height: 100px;
+  animation: rotation 2s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+/* right side */
+
+canvas {
+  width: 50%;
+  height: 100%;
+  position: fixed;
+  right: 0;
+  top: 0;
+  outline: none;
+}
+
+canvas.change {
+  width: 100%;
+}
+
+div#popups {
+  position: absolute;
+  height: 300px;
+  width: 300px;
+  right: 200px;
+  top: 200px;
+}
+
+div#popups div {
+  background-color: white;
+  color: black;
+  z-index: 70;
+  display: none;
+  border-radius: 25px;
+  padding: 30px;
+}
+
+/* left side */
+
+aside {
+  width: 50%;
+  height: 94vh;
+  overflow: hidden;
+  position: relative;
+  transform: translateX(0px);
+  transition: all 800ms cubic-bezier(0.8, 0, 0.33, 1);
+  background-color: aliceblue;
+  /* box-shadow: 10px 0px 15px rgb(177, 179, 182), rgba(177, 179, 182, 0.5),   rgba(177, 179, 182, 0.1); */
+  border-radius: 30px;
+  margin: 1.5%;
+}
+
+aside.change {
+  /* transform: translateX(calc(-50vw + 80px)); */
+  transition: all 800ms cubic-bezier(0.8, 0, 0.33, 1);
+  width: 80px;
+}
+
+aside .menu-btn {
+  position: absolute;
+  top: 30px;
+  right: 20px;
+  padding: 0;
+  width: 40px;
+  cursor: pointer;
+  z-index: 2;
+  color: lightgray;
+}
+
+svg {
+  margin: 0 5px;
+}
+
+/* Change arrow to x*/
+.line {
+  padding: 0;
+  width: 35px;
+  background: rgb(0, 0, 0);
+  height: 5px;
+  margin: 5px 0;
+  transition: all 700ms cubic-bezier(0.9, 0, 0.33, 1);
+  border-radius: 2px;
+}
+
+.line1 {
+  transform: rotate(-40deg);
+}
+
+.line2 {
+  transform: scaleX(1.2) translateX(10px);
+}
+
+.line3 {
+  transform: rotate(40deg);
+}
+
+.change .line1 {
+  transform: rotate(0deg);
+}
+
+.change .line2 {
+  transform: scaleX(1) translateX(0px);
+}
+
+.change .line3 {
+  transform: rotate(0deg);
+}
+
+/* Navigation and Footer*/
+
+.nav-links {
+  position: absolute;
+  width: 90%;
+  height: 10%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  transition: all 700ms cubic-bezier(0.9, 0, 0.33, 1);
+}
+
+.change .nav-links {
+  position: absolute;
+  width: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  justify-content: space-evenly;
+  transform: translateX(10px);
+}
+
+.change .nav-links.header {
+  top: 15%;
+  height: 40%;
+}
+
+.nav-links.footer {
+  top: 90%;
+  bottom: 0;
+  width: 80%;
+  transition: all 700ms cubic-bezier(0.9, 0, 0.33, 1);
+}
+
+.change .nav-links.footer {
+  top: 70%;
+  height: 20%;
+}
+
+.change .nav-links a {
+  color: transparent;
+  height: 40px;
+  width: 40px;
+}
+
+.change .nav-links a svg {
+  color: black;
+  height: 30px;
+  width: 30px;
+}
+
+.link {
+  margin: 20px 10px;
+  text-decoration: none;
+  font-family: sans-serif;
+  color: rgba(65, 65, 65, 0.9);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 1rem;
+}
+
+.link:hover {
+  color: rgb(0, 0, 0);
+}
+
+/*Text area with an article per topic*/
+#textDiv {
+  width: 90%;
+  height: 70%;
+  padding: 5%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  overflow-y: scroll;
+  direction: rtl;
+  margin-right: 100px;
+}
+
+.change #textDiv {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.articleDiv {
+  width: 90%;
+  margin: auto;
+  direction: ltr;
+  /* display: none; */
+}
+
+.articleDiv.active {
+  width: 90%;
+  margin: auto;
+  direction: ltr;
+  display: block;
+}
+
+h1 {
+  color: lightgray;
+  font-size: 80px;
+}
+
+/*Text in Accordion*/
+
+button.accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+button.active,
+.accordion:hover {
+  background-color: #ccc;
+}
+
+.accordion:after {
+  content: "\02795"; /* Unicode character for "plus" sign (+) */
+  fill: #444;
+  font-size: 13px;
+  float: right;
+  margin-left: 5px;
+}
+
+button.active:after {
+  content: "\2796"; /* Unicode character for "minus" sign (-) */
+}
+
+div.panel {
+  padding: 0 18px;
+  background-color: white;
+  display: none;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+.link.active {
+  color: black;
+  size: 20px;
+  font-weight: 1000;
+  border-bottom: 3px solid rgb(44, 44, 44);
+}
+
+/*Scrollbar*/
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+@media only screen and (max-width: 768px) {
+  body {
+    background: none;
+  }
+
+  canvas {
+    width: 100%;
+    height: 80%;
+    top: 10%;
+    position: fixed;
+    left: 0;
+  }
+
+  aside {
+    width: 100%;
+    height: 100vh;
+    flex-direction: column;
+    z-index: 1;
+    background-color: transparent;
+  }
+
+  aside.change {
+    width: 100%;
+    height: 2%;
+    transform: none;
+  }
+
+  .nav-bar {
+    height: 100%;
+    width: 100%;
+    background-color: aliceblue;
+  }
+
+  aside .menu-btn {
+    position: fixed;
+    top: 30px;
+    right: 20px;
+    padding: 0;
+    width: 40px;
+    cursor: pointer;
+    z-index: 2;
+    color: lightgray;
+  }
+
+  .line1 {
+    transform: rotate(-45deg);
+  }
+
+  .line2 {
+    opacity: 0;
+  }
+
+  .line3 {
+    transform: translateY(-20px) rotate(45deg);
+  }
+
+  .change .line2 {
+    opacity: 1;
+  }
+
+  .change .line3 {
+    transform: none;
+  }
+
+  aside .nav-links {
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+  }
+
+  aside.change .nav-links {
+    transform: none;
+    height: 2%;
+  }
+
+  .nav-links.footer {
+    flex-direction: column;
+    top: 60%;
+    height: 25%;
+    margin-bottom: 5%;
+  }
+
+  .change .nav-links.footer {
+    background-color: transparent;
+    height: 0;
+  }
+
+  .change .nav-links a svg {
+    color: transparent;
+    height: 30px;
+    width: 30px;
+  }
+
+  #textDiv {
+    background-color: rgba(128, 128, 128, 0.25);
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    direction: ltr;
+  }
+
+  h1 {
+    font-size: 50px;
+    margin-bottom: -20px;
+  }
+}
