@@ -1,13 +1,14 @@
+// Open/Close Aside/Menu
 function toggle() {
-  var aside = document.getElementById("aside");
-  aside.classList.toggle("change");
-
   var canvas = document.getElementById("canvas");
   canvas.classList.toggle("change");
 
+  var aside = document.getElementById("aside");
+  aside.classList.toggle("change");
+
   /* var body = document.body.classList.toggle("change")*/
 
-  onWindowResize();
+  //onWindowResize();
 }
 
 const navLinks = document.querySelectorAll(".nav-links a");
@@ -30,6 +31,8 @@ divs.forEach((div) => {
 document.getElementById("Home").style.display = "block";
 document.getElementById("Home").classList.add("active");
 
+// Linking nav element with div
+// And displaying active
 navLinks.forEach((link) => {
   link.addEventListener("click", (e) => {
     e.preventDefault();
@@ -46,6 +49,7 @@ navLinks.forEach((link) => {
   });
 });
 
+// Accordion
 var acc = document.getElementsByClassName("accordion");
 var i;
 
@@ -64,4 +68,24 @@ for (i = 0; i < acc.length; i++) {
       panel.style.display = "block";
     }
   });
+}
+
+// Dark-Mode
+const darkModeToggle = document.querySelector("#dark-mode-toggle");
+const body = document.querySelector("body");
+
+function toggleDarkMode() {
+  body.classList.toggle("dark-mode");
+
+  if (body.classList.contains("dark-mode")) {
+    localStorage.setItem("darkMode", "enabled");
+  } else {
+    localStorage.setItem("darkMode", null);
+  }
+}
+
+if (localStorage.getItem("darkMode") === "enabled") {
+  body.classList.add("dark-mode");
+} else {
+  body.classList.remove("dark-mode");
 }
