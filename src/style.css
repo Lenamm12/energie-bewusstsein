@@ -174,7 +174,7 @@ svg {
 }
 
 .change .line2 {
-  transform: scaleX(1) translateX(0px);
+  transform: scaleX(1) translateX(10px);
 }
 
 .change .line3 {
@@ -199,14 +199,12 @@ svg {
   width: 80px;
   display: flex;
   flex-direction: column;
-  align-items: baseline;
   justify-content: space-evenly;
-  transform: translateX(10px);
 }
 
 .change .nav-links.header {
-  top: 15%;
-  height: 40%;
+  top: calc(94vh / 11);
+  height: calc(94vh / 11 * 6);
 }
 
 .nav-links.footer {
@@ -217,14 +215,16 @@ svg {
 }
 
 .change .nav-links.footer {
-  top: 70%;
-  height: 20%;
+  top: calc(94vh / 11 * 7);
+  height: calc(94vh / 11 * 4);
+  width: 80px;
 }
 
 .change .nav-links a {
   color: transparent;
   height: 40px;
   width: 40px;
+  margin: auto;
 }
 
 .change .nav-links a svg {
@@ -245,6 +245,7 @@ svg {
   font-weight: 700;
   text-transform: uppercase;
   font-size: 1rem;
+  display: inline-flex;
 }
 
 .dark-mode .link {
@@ -277,7 +278,7 @@ svg {
   width: 90%;
   margin: auto;
   direction: ltr;
-  /* display: none; */
+  display: none;
 }
 
 .articleDiv.active {
@@ -326,16 +327,16 @@ button.active,
   background-color: #ccc;
 }
 
-.accordion:after {
-  content: "\02795"; /* Unicode character for "plus" sign (+) */
+button.accordion::after {
+  content: "\025BC";
   fill: var(--light-text);
   font-size: 13px;
   float: right;
   margin-left: 5px;
 }
 
-button.active:after {
-  content: "\2796"; /* Unicode character for "minus" sign (-) */
+button.accordion.active::after {
+  content: "\025B2";
 }
 
 div.panel {
@@ -382,7 +383,7 @@ div.popups div svg {
 
 @media only screen and (max-width: 768px) {
   body {
-    background: none;
+    /* background: none; */
     color: var(--black);
   }
 
@@ -405,7 +406,7 @@ div.popups div svg {
   aside,
   .dark-mode aside {
     width: 100%;
-    height: 2%;
+    /* height: 2%; */
     transform: none;
     transition: none;
     background-color: transparent;
@@ -478,14 +479,10 @@ div.popups div svg {
     height: 2%;
   }
 
-  .change .nav-links.header {
-    top: 10%;
-  }
-
   .change .nav-links.footer {
     flex-direction: column;
-    top: 65%;
-    height: 25%;
+    /*   top: 65%;
+    height: 25%; */
     width: 100%;
     margin-bottom: 5%;
     transition: none;
@@ -497,8 +494,10 @@ div.popups div svg {
   }
 
   a.link,
-  .dark-mode a.link {
+  .dark-mode a.link,
+  .link:hover {
     color: transparent;
+    padding-left: 30px;
   }
 
   .change a.link {
@@ -511,7 +510,7 @@ div.popups div svg {
   }
 
   .change a.link svg {
-    color: transparent;
+    /* color: transparent; */
     height: 30px;
     width: 30px;
   }

@@ -1,7 +1,6 @@
 import "./style.css";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import { Color } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 
@@ -11,23 +10,9 @@ const canvas = document.querySelector("canvas.webgl");
 // Scene
 const scene = new THREE.Scene();
 
-// Object
-/* const geometry = new THREE.BoxGeometry(1, 1, 1)
-const material = new THREE.MeshBasicMaterial({ color: 0xff0000, wireframe: true })
-const mesh = new THREE.Mesh(geometry, material)
-scene.add(mesh) */
-
-/**
- * Raycaster
- */
+// Raycaster
 const pointer = new THREE.Vector2();
 const raycaster = new THREE.Raycaster();
-/* let currentIntersect = null
-const rayOrigin = new THREE.Vector3(- 3, 0, 0)
-const rayDirection = new THREE.Vector3(10, 0, 0)
-rayDirection.normalize()
- 
- raycaster.set(rayOrigin, rayDirection)*/
 
 const onMouseMove = (event) => {
   // calculate pointer position in normalized device coordinates
@@ -42,11 +27,11 @@ const onMouseMove = (event) => {
     console.log(intersects);
   }
 
-  // change color of the closest object intersecting the raycaster
+  // gets the closest object intersecting the raycaster
   if (intersects.length > 0) {
-    //   intersects[0].object.material.color.set(0xff0000);
     var objname = intersects[0].object.userData.name;
     if (objname != null && document.getElementById(objname) != null) {
+      console.log(objname);
       document.getElementById(objname).style.display = "block";
     }
   }
@@ -55,7 +40,6 @@ const onMouseMove = (event) => {
 window.addEventListener("mousemove", onMouseMove);
 
 // Sizes
-
 const sizes = {
   width: 0,
   height: 0,
@@ -114,13 +98,16 @@ function animateLoadingScreen() {
 
 animateLoadingScreen();
 
-/**
- * Lights
- */
-const ambientLight = new THREE.HemisphereLight(0xffffff, 0.6);
+// Camera
+const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height);
+camera.position.set(-40, 20, -40);
+scene.add(camera);
+
+// Lights
+const ambientLight = new THREE.HemisphereLight(0xffffff, 0.2);
 scene.add(ambientLight);
 
-const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6);
+const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
 directionalLight.castShadow = true;
 directionalLight.shadow.mapSize.set(1024, 1024);
 directionalLight.shadow.camera.far = 15;
@@ -128,19 +115,18 @@ directionalLight.shadow.camera.left = -7;
 directionalLight.shadow.camera.top = 7;
 directionalLight.shadow.camera.right = 7;
 directionalLight.shadow.camera.bottom = -7;
-directionalLight.position.set(-5, 5, 0);
+directionalLight.position.set(5, 7, 7);
 scene.add(directionalLight);
 
-// Camera
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height);
-camera.position.set(-7, 2, -5);
-scene.add(camera);
+const pointLight = new THREE.PointLight(0xffffff, 0.1);
+camera.add(pointLight);
 
 // Controls
 const controls = new OrbitControls(camera, canvas);
 controls.target.set(0, 0.75, 0);
 controls.enableDamping = true;
 controls.maxPolarAngle = Math.PI / 2;
+controls.maxDistance = 175;
 
 // Renderer
 const renderer = new THREE.WebGLRenderer({
@@ -168,8 +154,6 @@ function setSize() {
   } else {
     sizes.width = window.innerWidth;
     sizes.height = window.innerHeight;
-
-    //aside.classList.toggle("change");
   }
 }
 
