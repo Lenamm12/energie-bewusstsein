@@ -13,7 +13,7 @@ const divs = document.querySelectorAll("div.articleDiv");
 // And displaying active
 navLinks.forEach((link) => {
   link.addEventListener("click", (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     const targetDiv = link.getAttribute("href").replace("#", "");
     divs.forEach((div) => {
       if (div.id === targetDiv) {
@@ -22,6 +22,7 @@ navLinks.forEach((link) => {
         div.classList.remove("active");
       }
     });
+    // threejsAnimation(targetDiv);
     if (aside.classList.contains("change")) {
       toggle();
     }

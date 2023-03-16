@@ -39,8 +39,8 @@
           <a class="link" href="#Home" class="active"
             ><i class="fa-solid fa-house"></i>Home</a
           >
-          <a class="link" href="#Tipps"
-            ><i class="fa-solid fa-book"></i>Tipps</a
+          <a class="link" href="#Mobilitaet"
+            ><i class="fa-solid fa-bus"></i>Mobilität</a
           >
           <a class="link" href="#Energie"
             ><i class="fa-solid fa-fire"></i>Energie</a
@@ -130,9 +130,9 @@
           </p>
         </div>
 
-        <div id="Tipps" class="articleDiv">
-          <h1>Tipps</h1>
-          <h2>Psychologische Tipps</h2>
+        <div id="Mobilitaet" class="articleDiv">
+          <h1>Mobilität</h1>
+          <!-- <h2>Psychologische Tipps</h2>
           <div>
             <ol>
               <li>
@@ -184,8 +184,8 @@
                 </p>
               </li>
             </ol>
-          </div>
-          <h2>Top 10 - Schnelle Abhilfen</h2>
+          </div> -->
+          <!--   <h2>Top 10 - Schnelle Abhilfen</h2>
           <div>
             <p>
               Wer nicht die Zeit findet, alle Seiten mit Tipps und Informationen
@@ -215,7 +215,7 @@
                   Ger&uuml;te sollten gemeinsam an/ausgeschaltet werden.
                   Komfortabel ist dies &uuml;ber eine schaltbare
                   Steckdosenleiste m&ouml;glich. Verwendbar f&uuml;r Gruppen wie
-                  z.B. Fernseher + Videorekorder + DVD Player oder Computer +
+                  z.B. Fernseher + DVD Player oder Computer +
                   Bildschirm + Drucker + Lautsprecherboxen<br /><br />
                 </p>
               </li>
@@ -334,7 +334,7 @@
                 </p>
               </li>
             </ol>
-          </div>
+          </div> -->
           <!-- <h2>Gemischte Tipps</h2>
 <div>
 <p>Hier ein paar Beispiele:</p>
@@ -347,7 +347,7 @@
 <p>Viele Menschen kaufen Mineralwasser im Gesch&auml;ft, obwohl man gutes Trinkwasser durch die Wasserleitung sehr g&uuml;nstig ins Haus geliefert bekommt! Und dieses Leitungswasser ist oftmals genauso gut wie das Wasser aus dem Geschirr.</p>
 <p>Wer auf die Kohlens&auml;ure nicht verzichten m&ouml;chte, kann diese mit einem entsprechenden Ger&auml;t nach Belieben hinzuf&uuml;gen.</p>
 </div> -->
-          <h2>Mobilit&auml;t</h2>
+          <!-- <h2>Mobilit&auml;t</h2> -->
           <div>
             <button class="accordion">Sprit sparen - so einfach gehts!</button>
             <div class="panel">
@@ -4650,11 +4650,30 @@
         </div>
       </div>
     </aside>
-    <button id="dark-mode-toggle" onclick="toggleDarkMode()">
-      <i class="fa-solid fa-circle-half-stroke"></i>
-    </button>
+
     <div id="loading-screen">
-      <i class="fa-solid fa-spinner" id="rotate-icon"></i>
+      <div style="margin: 5%">
+        <h1>Willkommen auf energie-bewusstsein.de</h1>
+      </div>
+      <div id="loading-animation">
+        <img src="../static/windrad.png" />
+        <img src="../static/windrad-fluegel.png" id="rotate-icon" />
+        <!-- <i class="fa-solid fa-spinner" id="rotate-icon"></i> -->
+      </div>
+      <div id="loading-texts">
+        <p class="loading-text" style="display: block">
+          Bitte warten. Energie wird erzeugt ...
+        </p>
+        <p class="loading-text">
+          Tipp: Unbenutzte Geräte ausstecken um Strom zu sparen!
+        </p>
+        <p class="loading-text">
+          Tipp: Steckdosenleisten für zusammenhängende Geräte verwenden und
+          diese nur bei Bedarf einschalten!
+        </p>
+        <p class="loading-text">Genug Energie gesammelt</p>
+        <p class="loading-text">Seite wird aufgebaut ...</p>
+      </div>
     </div>
     <div id="popups">
       <div id="Boden">
@@ -4672,5 +4691,12 @@
         <p>Dach</p>
       </div>
     </div>
+    <button
+      id="dark-mode-toggle"
+      onclick="toggleDarkMode()"
+      aria-label="Dark-Mode-Button"
+    >
+      <i class="fa-solid fa-circle-half-stroke"></i>
+    </button>
   </body>
 </html>
