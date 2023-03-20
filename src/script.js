@@ -48,7 +48,7 @@ const sizes = {
 setSize();
 
 const dracoLoader = new DRACOLoader();
-dracoLoader.setDecoderPath("/draco/");
+dracoLoader.setDecoderPath("/draco/gltf/");
 
 const gltfLoader = new GLTFLoader();
 gltfLoader.setDRACOLoader(dracoLoader);
@@ -57,8 +57,10 @@ let mixer = null;
 
 var loadingScreen = document.getElementById("loading-screen");
 
+dracoLoader.preload();
+
 gltfLoader.load(
-  "/modell/haus.glb",
+  "/modell/hausK.glb",
   (gltf) => {
     console.log(gltf);
     gltf.scene.scale.set(0.025, 0.025, 0.025);
@@ -80,9 +82,9 @@ gltfLoader.load(
 
     // Animation
     mixer = new THREE.AnimationMixer(gltf.scene);
-    mixer.clipAction(gltf.animations[0].channels[0]).play();
-    // const action = mixer.clipAction(gltf.animations[0]);
-    // action.play();
+    // mixer.clipAction(gltf.animations[0].channels[0]).play();
+    const action = mixer.clipAction(gltf.animations[0]);
+    action.play();
   },
   (progress) => {
     // console.log(progress)
@@ -104,13 +106,13 @@ function animateLoadingScreen() {
   // var counter = 0;
 
   // for (var counter = 0; counter < loadingtexts.length; i++) {
-  //   setInterval(function () {
-  //     animateText(counter);
+  //   setTimeout(function () {
+  //     animateText();
   //     //counter++;
   //   }, 5000);
   // }
 
-  // function animateText(counter) {
+  // function animateText() {
   //   console.log(counter);
   //   if (counter < loadingtexts.length) {
   //     loadingtexts[counter].style.display = "none";
@@ -278,6 +280,8 @@ window.addEventListener("mousemove", (event) => {
   cursor.x = event.clientX / sizes.width - 0.5;
   cursor.y = -(event.clientY / sizes.height - 0.5);
 });
+
+console.log(renderer.info);
 
 // Animate
 const clock = new THREE.Clock();
