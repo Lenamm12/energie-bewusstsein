@@ -14,6 +14,7 @@ const scene = new THREE.Scene();
 const pointer = new THREE.Vector2();
 const raycaster = new THREE.Raycaster();
 
+// Click-Event to show corresponding pop-ups
 const onMouseDown = (event) => {
   // calculate pointer position in normalized device coordinates
   // (-1 to +1) for both components
@@ -23,13 +24,14 @@ const onMouseDown = (event) => {
   raycaster.setFromCamera(pointer, camera);
   const intersects = raycaster.intersectObjects(scene.children);
 
+  // For testing purposes:
   /*  for (let i = 0; i < intersects.length; i++) {
     console.log(intersects);
   } */
 
-  // gets the closest object intersecting the raycaster
+  // Showing pop-up
   if (intersects.length > 0) {
-    var objname = intersects[0].object.userData.name;
+    var objname = intersects[0].object.userData.name; // gets the closest object name intersecting the raycaster
     console.log(objname);
     if (objname != null && document.getElementById(objname) != null) {
       document.getElementById(objname).style.display = "block";
@@ -47,9 +49,11 @@ const sizes = {
 };
 setSize();
 
+// DracoLoader for compressed model
 const dracoLoader = new DRACOLoader();
 dracoLoader.setDecoderPath("/draco/gltf/");
 
+// Normal model loader
 const gltfLoader = new GLTFLoader();
 gltfLoader.setDRACOLoader(dracoLoader);
 
@@ -67,6 +71,7 @@ gltfLoader.load(
 
     while (gltf.scene.children.length) {
       var object = gltf.scene.children[0];
+      // Option to make model a wireframe
       /*   object.traverse((node) => {
               if (!node.isMesh) return;
               node.material.wireframe = true;
@@ -82,24 +87,21 @@ gltfLoader.load(
 
     // Animation
     mixer = new THREE.AnimationMixer(gltf.scene);
-    // mixer.clipAction(gltf.animations[0].channels[0]).play();
     const action = mixer.clipAction(gltf.animations[0]);
     action.play();
   },
   (progress) => {
-    // console.log(progress)
     animateLoadingScreen();
   },
   (error) => {
-    console.log("Error:");
     console.log(error);
   }
 );
 
 function animateLoadingScreen() {
-  // loadingScreen.children[0].style.transform = "rotate(1deg)";
   requestAnimationFrame(animateLoadingScreen);
 
+  // Experiment to show different texts in loading screen every 5 seconds
   // A loop that removes display none from previous p-element and add display block to current p-element in array
 
   // const loadingtexts = document.querySelectorAll(".loading-text");
@@ -134,11 +136,12 @@ camera.position.set(-60, 30, -60);
 scene.add(camera);
 
 // Lights
-
+// Light in the House
 const innerLight = new THREE.PointLight(0xffffff, 0.8);
 innerLight.position.set(0, 5, 0);
 scene.add(innerLight);
 
+// Light which is attached to camera
 const spotLight = new THREE.SpotLight(0xffffaa, 0.2);
 spotLight.castShadow = true;
 
@@ -151,10 +154,12 @@ spotLight.shadow.camera.fov = 30;
 
 camera.add(spotLight);
 
+// Ambient light
 const ambientLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.6);
 ambientLight.position.set(0, 500, 0);
 scene.add(ambientLight);
 
+// Sun that casts shadows
 const directionalLight = new THREE.DirectionalLight(0xc0dbeb, 0.5);
 directionalLight.castShadow = true;
 directionalLight.shadow.mapSize.set(1024, 1024);
@@ -166,9 +171,11 @@ directionalLight.shadow.camera.bottom = -7;
 directionalLight.position.set(5, 7, 7);
 scene.add(directionalLight);
 
+// Getting dark-mode button and adding event-listener
 let darkmodeButton = document.getElementById("dark-mode-toggle");
 darkmodeButton.addEventListener("click", lights, false);
 
+// Switching lights depending on dark-mode
 function lights() {
   if (document.body.classList.contains("dark-mode")) {
     ambientLight.intensity = 0;
@@ -198,7 +205,6 @@ controls.minDistance = 35;
 const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
   alpha: true,
-  // powerPreference: "high-performance",
 });
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -210,6 +216,10 @@ lights();
 document.addEventListener("resize", () => {
   onWindowResize();
 });
+
+/**
+ * Event listeners for Resizing
+ */
 
 function setSize() {
   var aside = document.getElementById("aside");
@@ -251,6 +261,7 @@ button.addEventListener("click", function () {
   onWindowResize();
 });
 
+// Fullscreen option
 /* window.addEventListener("dblclick", () => {
   const fullscreenElement =
     document.fullscreenElement || document.webkitFullscreenElement;
@@ -301,24 +312,19 @@ const tick = () => {
   controls.update();
 
   // Render
-  // OrbitControls.addEventListener("change", () =>
-  //   renderer.render(scene, camera)
-  // );
   renderer.render(scene, camera);
 
   // Call tick again on the next frame
   window.requestAnimationFrame(tick);
-
-  // console.log(camera.position);
 };
 
 // GSAP Animation
 let animation = gsap.timeline({});
 
+// Setting camera on position based on current category
 window.addEventListener("hashchange", () => {
   let category = location.hash.replace("#", "");
 
-  // console.log(category + " was clicked");
   switch (category) {
     case "Home":
       animation.to(camera.position, {

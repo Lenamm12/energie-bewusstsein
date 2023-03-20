@@ -325,6 +325,15 @@ h1 {
   margin-left: -0.5em;
 }
 
+.download-button {
+  border-radius: 20px;
+  height: 50px;
+  width: 150px;
+  background-color: transparent;
+  border-color: var(--light-text);
+  box-shadow: #555;
+}
+
 /*Text in Accordion*/
 
 button.accordion {
